@@ -34,10 +34,10 @@
 					    include 'database.php';
 						echo '<tbody>';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM customers ORDER BY id DESC';
+						$sql = 'SELECT * FROM customers ORDER BY cid DESC';
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
-							echo '<td>'. $row['name'] . '</td>';
+							echo '<td>'. $row['cname'] . '</td>';
 							echo '<td>'. $row['username'] . '</td>';
 							echo '<td>'. $row['password'] . '</td>';
 							echo '<td>'. $row['address'] . '</td>';
@@ -45,11 +45,11 @@
 							echo '<td>'. $row['email'] . '</td>';
 							echo '<td>'. $row['mobile'] . '</td>';
 							echo '<td width=250>';
-							echo '<a class="btn" href="customerRead.php?id='.$row['id'].'">Read</a>';
+							echo '<a class="btn" href="customerRead.php?id='.$row['cid'].'">Read</a>';
 							echo '&nbsp;';
-							echo '<a class="btn btn-success" href="customerUpdate.php?id='.$row['id'].'">Update</a>';
+							echo '<a class="btn btn-success" href="customerUpdate.php?id='.$row['cid'].'">Update</a>';
 							echo '&nbsp;';
-							echo '<a class="btn btn-danger" href="customerDelete.php?id='.$row['id'].'">Delete</a>';
+							echo '<a class="btn btn-danger" href="customerDelete.php?id='.$row['cid'].'">Delete</a>';
 							echo '</td>';
 							echo '</tr>';
 						}	

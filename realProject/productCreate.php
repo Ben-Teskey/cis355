@@ -34,7 +34,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO products (name,description, price) values(?, ?, ?)";
+			$sql = "INSERT INTO products (pname,description, price) values(?, ?, ?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$description, $price));
 			Database::disconnect();

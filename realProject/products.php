@@ -30,18 +30,18 @@
 					    include 'database.php';
 						echo '<tbody>';
 						$pdo = Database::connect();
-						$sql = 'SELECT * FROM products ORDER BY id DESC';
+						$sql = 'SELECT * FROM products ORDER BY pid DESC';
 						foreach ($pdo->query($sql) as $row) {
 							echo '<tr>';
-							echo '<td>'. $row['name'] . '</td>';
+							echo '<td>'. $row['pname'] . '</td>';
 							echo '<td>'. $row['description'] . '</td>';
 							echo '<td>'. $row['price'] . '</td>';
 							echo '<td width=250>';
-							echo '<a class="btn" href="productRead.php?id='.$row['id'].'">Read</a>';
+							echo '<a class="btn" href="productRead.php?id='.$row['pid'].'">Read</a>';
 							echo '&nbsp;';
-							echo '<a class="btn btn-success" href="productUpdate.php?id='.$row['id'].'">Update</a>';
+							echo '<a class="btn btn-success" href="productUpdate.php?id='.$row['pid'].'">Update</a>';
 							echo '&nbsp;';
-							echo '<a class="btn btn-danger" href="productDelete.php?id='.$row['id'].'">Delete</a>';
+							echo '<a class="btn btn-danger" href="productDelete.php?id='.$row['pid'].'">Delete</a>';
 							echo '</td>';
 							echo '</tr>';
 						}	

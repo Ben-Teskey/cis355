@@ -4,13 +4,17 @@
 	if ( !empty($_GET['id'])) {
 		$id = $_REQUEST['id'];
 	}
-	
+	$data = null;
 	if ( null==$id ) {
 		header("Location: transactions.php");
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM transactions where id = ?";
+		$sql = "SELECT cname, pname, time ";
+		$sql .= "FROM transactions ";
+		$sql .= "INNER JOIN customers ON cid = customer_id ";
+		$sql .= "INNER JOIN products ON pid = product_id ";
+		$sql .= "WHERE id = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -36,26 +40,26 @@
 		    		
 	    			<div class="form-horizontal" >
 					  <div class="control-group">
-					    <label class="control-label">customer_id</label>
+					    <label class="control-label">Customer</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['customer_id'];?>
+						     	<?php echo $data['cname'];?>
 						    </label>
 					    </div>
 					  </div>
 					 </div>
 					<div class="form-horizontal" >
 					  <div class="control-group">
-					    <label class="control-label">product_id</label>
+					    <label class="control-label">Product</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['product_id'];?>
+						     	<?php echo $data['pname'];?>
 						    </label>
 					    </div>
 					  </div>
 					  <div class="form-horizontal" >
 					  <div class="control-group">
-					    <label class="control-label">time</label>
+					    <label class="control-label">Time</label>
 					    <div class="controls">
 						    <label class="checkbox">
 						     	<?php echo $data['time'];?>

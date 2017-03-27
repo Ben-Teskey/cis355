@@ -84,7 +84,18 @@
 					  <div class="control-group <?php echo !empty($customer_idError)?'error':'';?>">
 					    <label class="control-label">customer_id</label>
 					    <div class="controls">
-					      	<input name="customer_id" type="text"  placeholder="customer_id" value="<?php echo !empty($customer_id)?$customer_id:'';?>">
+                            <select name="customer_id">
+                                <?php
+                                $pdoCustomer = Database::connect();
+                                $sqlCustomer = 'SELECT * FROM customers';
+
+                                foreach ($pdoCustomer->query($sqlCustomer) as $rowCustomer) {
+                                    echo '<option value="' . $rowCustomer['cid'] . '">' . $rowCustomer['cname']
+                                        . '</option>';
+
+                                }
+                                ?>
+                            </select>
 					      	<?php if (!empty($customer_idError)): ?>
 					      		<span class="help-inline"><?php echo $customer_idError;?></span>
 					      	<?php endif; ?>
@@ -93,7 +104,18 @@
 					  <div class="control-group <?php echo !empty($product_idError)?'error':'';?>">
 					    <label class="control-label">product_id</label>
 					    <div class="controls">
-					      	<input name="product_id" type="text"  placeholder="product_id" value="<?php echo !empty($product_id)?$product_id:'';?>">
+                            <select name="product_id">
+                                <?php
+                                $pdoProduct = Database::connect();
+                                $sqlProduct = 'SELECT * FROM products';
+
+                                foreach ($pdoProduct->query($sqlProduct) as $rowProduct) {
+                                    echo '<option value="' . $rowProduct['pid'] . '">' . $rowProduct['pname']
+                                        . '</option>';
+
+                                }
+                                ?>
+                            </select>
 					      	<?php if (!empty($product_idError)): ?>
 					      		<span class="help-inline"><?php echo $product_idError;?></span>
 					      	<?php endif; ?>

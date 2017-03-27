@@ -10,7 +10,7 @@
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM customers where id = ?";
+		$sql = "SELECT * FROM customers where cid = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
@@ -39,7 +39,7 @@
 					    <label class="control-label">Name</label>
 					    <div class="controls">
 						    <label class="checkbox">
-						     	<?php echo $data['name'];?>
+						     	<?php echo $data['cname'];?>
 						    </label>
 					    </div>
 					  </div>

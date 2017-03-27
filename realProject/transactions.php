@@ -37,17 +37,17 @@
                             $prodID = $row['product_id'];
                             $custID = $row['customer_id'];
 
-                            $prodSQL = 'SELECT name FROM products WHERE id = ' . $prodID;
-                            $custSQL = 'SELECT name FROM customers WHERE id = ' . $custID;
+                            $prodSQL = 'SELECT pname FROM products WHERE pid = ' . $prodID;
+                            $custSQL = 'SELECT cname FROM customers WHERE cid = ' . $custID;
 
                             $custName = '';
                             $prodName = '';
                             foreach ($pdo->query($prodSQL) as $prodRow) {
-                                $prodName = $prodRow['name'];
+                                $prodName = $prodRow['pname'];
                             }
 
                             foreach ($pdo->query($custSQL) as $custRow) {
-                                $custName = $custRow['name'];
+                                $custName = $custRow['cname'];
                             }
 
 							echo '<tr>';

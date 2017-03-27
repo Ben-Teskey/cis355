@@ -65,7 +65,7 @@
                                   $sqlCustomer = 'SELECT * FROM customers';
 
                                   foreach ($pdoCustomer->query($sqlCustomer) as $rowCustomer) {
-                                      echo '<option value="' . $rowCustomer['id'] . '">' . $rowCustomer['name']
+                                      echo '<option value="' . $rowCustomer['cid'] . '">' . $rowCustomer['cname']
                                           . '</option>';
 
                                   }
@@ -86,7 +86,7 @@
                                 $sqlProduct = 'SELECT * FROM products';
 
                                 foreach ($pdoProduct->query($sqlProduct) as $rowProduct) {
-                                    echo '<option value="' . $rowProduct['id'] . '">' . $rowProduct['name']
+                                    echo '<option value="' . $rowProduct['pid'] . '">' . $rowProduct['pname']
                                         . '</option>';
 
                                 }

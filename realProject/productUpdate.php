@@ -43,7 +43,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE products  set name = ?, description = ?, price = ? WHERE id = ?";
+			$sql = "UPDATE products  set pname = ?, description = ?, price = ? WHERE pid = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name, $description, $price, $id));
 			Database::disconnect();
@@ -52,11 +52,11 @@
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM products where id = ?";
+		$sql = "SELECT * FROM products where pid = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$name = $data['name'];
+		$name = $data['pname'];
 		$description = $data['description'];
 		$price = $data['price'];
 		Database::disconnect();

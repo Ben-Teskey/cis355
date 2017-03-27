@@ -69,7 +69,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "UPDATE customers  set name = ?, email = ?, mobile = ?, username = ?, password = ?, payment_info = ?, address = ? WHERE id = ?";
+			$sql = "UPDATE customers  set cname = ?, email = ?, mobile = ?, username = ?, password = ?, payment_info = ?, address = ? WHERE cid = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$email,$mobile, $username, $password, $payment_info, $address, $id));
 			Database::disconnect();
@@ -78,11 +78,11 @@
 	} else {
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "SELECT * FROM customers where id = ?";
+		$sql = "SELECT * FROM customers where cid = ?";
 		$q = $pdo->prepare($sql);
 		$q->execute(array($id));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
-		$name = $data['name'];
+		$name = $data['cname'];
 		$email = $data['email'];
 		$mobile = $data['mobile'];
 		$username = $data['username'];

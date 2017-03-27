@@ -60,7 +60,7 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "INSERT INTO customers (name,email,mobile, username, password, payment_info, address) values(?, ?, ?, ?, ?, ?, ?)";
+			$sql = "INSERT INTO customers (cname,email,mobile, username, password, payment_info, address) values(?, ?, ?, ?, ?, ?, ?)";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($name,$email,$mobile, $username, $password, $payment_info, $address));
 			Database::disconnect();
