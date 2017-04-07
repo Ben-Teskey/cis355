@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link   href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    
+    			<div class="span10 offset1">
+    				<div class="row">
+		    			<h3>Delete a transaction</h3>
+		    		</div>
+		    		
+	    			<form class="form-horizontal" >
+					  <p class="alert alert-error"><span id="confirmDeleteMessage"></span></p>
+					  <div class="form-actions">
+						  <button id="confirmDelete" type="button" class="btn btn-danger">Yes</button>
+						  <a class="btn" href="transactions.html">No</a>
+						</div>
+					</form>
+				</div>
+				
+    </div> <!-- /container -->
+	<script>
+
+        $.urlParam = function(name){
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            return results[1] || 0;
+        };
+
+        $( document ).ready(function() {
+            $.ajax({
+                url: 'deleteConfirm.php',
+                type: 'POST',
+                data: {
+                    id: $.urlParam('id')
+                }
+            }).done(function (data) {
+                $('#confirmDeleteMessage').append(data);
+            });
+
+        });
+
+        $("#confirmDelete").click(function() {
+
+            $.ajax({
+                url: 'deleteTransaction.php',
+                type: 'POST',
+                data: {
+                    id: $.urlParam('id')
+                }, success: function() {
+                    window.location.href = "https://csis.svsu.edu/~bjteskey/cis355/Project/transactions.html";
+                }
+            });
+
+        });
+	</script>
+  </body>
+</html>

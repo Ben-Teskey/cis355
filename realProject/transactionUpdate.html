@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link   href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    
+    			<div class="span10 offset1">
+    				<div class="row">
+		    			<h3>Update a Transaction</h3>
+		    		</div>
+    		
+			          <form class="form-horizontal" >
+					  <div class="control-group ">
+					    <label class="control-label">Customer</label>
+					    <div class="controls">
+                            <select id="customer_id" name="customer_id"></select>
+					    </div>
+					  </div>
+					  <div class="control-group ">
+					    <label class="control-label">Product</label>
+					    <div class="controls">
+                            <select id="product_id" name="product_id"></select>
+					    </div>
+					  </div>
+					  
+					  <div class="control-group ">
+					    <label class="control-label">Time</label>
+					    <div id="timeInput" class="controls"></div>
+					  </div>
+					  
+					  <div class="form-actions">
+						  <button id="updateButton" type="button" class="btn btn-success">Update</button>
+						  <a class="btn" href="transactions.html">Back</a>
+						</div>
+					</form>
+				</div>
+				
+    </div> <!-- /container -->
+	<script>
+		$.urlParam = function(name){
+			var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			return results[1] || 0;
+		};
+	    $("#updateButton").click(function() {
+            
+			$.ajax({
+                url: 'updateTransaction.php',
+                type: 'POST',
+                data: {
+                    id: $.urlParam('id'),
+					time: $('#timeInputBox').val(),
+					customer_id: $('#customer_id').val(),
+					product_id: $('#product_id').val()
+                },
+				success: function() {
+                    window.location.href = "https://csis.svsu.edu/~bjteskey/cis355/Project/transactions.html";
+				}
+
+            });
+            
+        });
+		$( document ).ready(function() {
+            $.ajax({
+                url: 'getCustomerOptions.php',
+				method: 'POST',
+				data: {
+					id : $.urlParam('id')
+				}
+            }).done(function (data) {
+                $('#customer_id').append(data);
+            });
+            $.ajax({
+                url: 'getProductOptions.php',
+				method: 'POST',
+				data: {
+					id : $.urlParam('id')
+				}
+            }).done(function (data) {
+                $('#product_id').append(data);
+            });
+			$.ajax({
+                url: 'getTime.php',
+				method: 'POST',
+				data: {
+					id  : $.urlParam('id')
+				}
+            }).done(function (data) {
+                $('#timeInput').append(data);
+            });
+        })
+	</script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link   href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+    
+    			<div class="span10 offset1">
+    				<div class="row">
+		    			<h3>Create a Transaction</h3>
+		    		</div>
+
+	    			<form class="form-horizontal" method="post">
+					  <div class="control-group">
+					    <label class="control-label">Customer</label>
+
+                          <div class="controls">
+                              <select id="customer_id" name="customer_id"></select>
+					    </div>
+					  </div>
+					  <form class="form-horizontal" action="transactionCreate.html" method="post">
+					  <div class="control-group">
+					    <label class="control-label">Product</label>
+					    <div class="controls">
+                            <select id="product_id" name="product_id"></select>
+					    </div>
+
+					  </div>
+
+					  
+					  <div class="form-actions">
+						  <button type="button" id="create" class="btn btn-success">Create</button>
+						  <a class="btn" href="transactions.html">Back</a>
+						</div>
+					</form>
+				</div>
+				
+    </div> <!-- /container -->
+
+    <script>
+        <!-- Ajax call passes search string to get table transcations -->
+        $("#create").click(function() {
+            
+			$.ajax({
+                url: 'insertTransaction.php',
+                type: 'POST',
+                data: {
+                    customer_id: $('#customer_id').val(),
+                    product_id: $('#product_id').val()
+                }, success: function() {
+                    window.location.href = "https://csis.svsu.edu/~bjteskey/cis355/Project/transactions.html";
+                }
+            });
+            
+        });
+
+        $( document ).ready(function() {
+            $.ajax({
+                url: 'getCustomerOptions.php'
+            }).done(function (data) {
+                $('#customer_id').append(data);
+            });
+            $.ajax({
+                url: 'getProductOptions.php'
+            }).done(function (data) {
+                $('#product_id').append(data);
+            });
+        })
+
+    </script>
+  </body>
+</html>

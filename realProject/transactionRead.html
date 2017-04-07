@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link   href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+    
+    			<div class="span10 offset1">
+    				<div class="row">
+		    			<h3>Read a transaction</h3>
+		    		</div>
+		    		
+	    			<div class="form-horizontal" >
+					  <div class="control-group">
+					    <label class="control-label">Customer</label>
+					    <div class="controls">
+						    <label id="customerLabel" class="checkbox"></label>
+					    </div>
+					  </div>
+					 </div>
+					<div class="form-horizontal" >
+					  <div class="control-group">
+					    <label class="control-label">Product</label>
+					    <div class="controls">
+						    <label id="productLabel" class="checkbox"></label>
+					    </div>
+					  </div>
+					  <div class="form-horizontal" >
+					  <div class="control-group">
+					    <label class="control-label">Time</label>
+					    <div class="controls">
+						    <label id="timeLabel" class="checkbox"></label>
+					    </div>
+					  </div>
+					  </div>
+					    <div class="form-actions">
+						  <a class="btn" href="transactions.html">Back</a>
+					   </div>
+					
+				</div>
+    </div> <!-- /container -->
+		<script>
+
+            $.urlParam = function(name){
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+                return results[1] || 0;
+            };
+
+            $( document ).ready(function() {
+                $.ajax({
+                    url: 'getCustomer.php',
+                    type: 'POST',
+                    data: {
+                        id: $.urlParam('id')
+                    }
+                }).done(function (data) {
+                    $('#customerLabel').append(data);
+                });
+                $.ajax({
+                    url: 'getProduct.php',
+                    type: 'POST',
+                    data: {
+                        id: $.urlParam('id')
+                    }
+                }).done(function (data) {
+                    $('#productLabel').append(data);
+                });
+                $.ajax({
+                    url: 'getTimeLabel.php',
+                    type: 'POST',
+                    data: {
+                        id: $.urlParam('id')
+                    }
+                }).done(function (data) {
+                    $('#timeLabel').append(data);
+                });
+
+            });
+
+		</script>
+  </body>
+</html>

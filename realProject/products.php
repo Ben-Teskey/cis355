@@ -1,9 +1,19 @@
+<?php
+session_start();
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    die();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link   href="css/bootstrap.min.css" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -37,7 +47,7 @@
 							echo '<td>'. $row['description'] . '</td>';
 							echo '<td>'. $row['price'] . '</td>';
 							echo '<td width=250>';
-							echo '<a class="btn" href="productRead.php?id='.$row['pid'].'">Read</a>';
+							echo '<a class="btn btn-default" href="productRead.php?id='.$row['pid'].'">Read</a>';
 							echo '&nbsp;';
 							echo '<a class="btn btn-success" href="productUpdate.php?id='.$row['pid'].'">Update</a>';
 							echo '&nbsp;';
@@ -51,7 +61,8 @@
 					  
 	            </table>
 				<a class="btn btn-info" href="customers.php">Customers</a>
-				<a class="btn btn-info" href="transactions.php">Transactions</a>
+				<a class="btn btn-info" href="transactions.html">Transactions</a>
+                <a class="pull-right btn btn-danger" href="logout.php">Logout</a>
     	</div>
     </div> <!-- /container -->
   </body>

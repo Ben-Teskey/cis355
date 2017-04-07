@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://bootswatch.com/cyborg/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div style="padding-bottom: 50px" class="container">
+        <h3 class="col-xs-3">Transactions</h3>
+        <div style="padding-top:20px;">
+            <div class="col-xs-1 pull-right"><a href="transactionCreate.html" class="btn btn-success">Create</a></div>
+            <div class="col-md-offset-1 col-md-5 pull-right">
+                <div id="custom-search-input">
+                    <div class="input-group">
+
+                        <input type="text" id="search" class="form-control input-md" placeholder="Search Transactions" />
+                        <span class="input-group-btn">
+                        <button class="btn btn-info btn-md" id="searchButton" type="button">Search</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" style="height:20px;"></div>
+        <div class="row">
+            <table id="transactionsTable" class="table table-striped table-bordered"></table>
+            <a class="btn btn-info" href="customers.php">Customers</a>
+            <a class="btn btn-info" href="products.php">Products</a>
+            <a class="pull-right btn btn-danger" href="logout.php">Logout</a>
+            <a class="btn btn-default" href="transactionsAPI.php">API</a>
+
+        </div>
+    </div> <!-- /container -->
+
+  <script>
+
+      $.ajax({
+          url: 'checkIfLoggedIn.php',
+          error: function() {
+              window.location.replace("https://csis.svsu.edu/~bjteskey/cis355/Project/login.php");
+          }
+      });
+
+      <!-- Ajax call passes search string to get table transcations -->
+      $("#searchButton").click(function() {
+          $.ajax({
+              url: 'getTransactions.php',
+              type: 'POST',
+              data: {
+                  search: $('#search').val()
+              }
+          }).done(function (data) {
+              $('#transactionsTable').html(data.toString());
+          });
+      });
+
+      $( document ).ready(function() {
+          $('#transactionsTableContent').html("");
+          $("#searchButton").click();
+      });
+
+  </script>
+  </body>
+</html>
